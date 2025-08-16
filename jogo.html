@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Jogo de Adivinhação</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 28px;
+        }
+
+        p {
+            margin: 10px 0;
+            color: #555;
+        }
+
+        input[type="number"] {
+            padding: 12px;
+            font-size: 16px;
+            width: 80px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            transition: border 0.2s;
+        }
+
+        input[type="number"]:focus {
+            border-color: #667eea;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            margin-left: 10px;
+            cursor: pointer;
+            background-color: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #5a67d8;
+        }
+
+        #mensagem {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Jogo de Adivinhação</h1>
+        <p>Digite um número de 1 a 10 (se errar vai me dar):</p>
+        <input type="number" id="palpite" min="1" max="10">
+        <button onclick="verificarPalpite()">Adivinhar</button>
+        <p id="mensagem"></p>
+    </div>
+
+    <script>
+        const numeroSecreto = Math.floor(Math.random() * 10) + 1;
+
+        function verificarPalpite() {
+            const entrada = document.getElementById("palpite");
+            const valor = Number(entrada.value);
+            const mensagem = document.getElementById("mensagem");
+
+            if (!valor || valor < 1 || valor > 10) {
+                mensagem.textContent = "Digite um número válido entre 1 e 10.";
+                mensagem.style.color = "#ff8800";
+            } else if (valor === numeroSecreto) {
+                mensagem.textContent = "🎉 Parabéns! Você acertou!";
+                mensagem.style.color = "green";
+            } else {
+                mensagem.textContent = "❌ Errado! Tente novamente.";
+                mensagem.style.color = "red";
+            }
+
+            entrada.value = "";
+        }
+    </script>
+
+</body>
+</html>
